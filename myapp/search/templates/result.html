@@ -1,243 +1,242 @@
-
 {% load static %}
-<head>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
-    />
-    <link
-      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-      rel="stylesheet"
-    />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/search.css' %}">
-    <meta charset="utf-8" />
-    <title>物件検索</title>
-  
+<head>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+  <meta charset="utf-8" />
+  <title>物件検索</title>
+
 </head>
+
 <body>
   <header>
-        <a href ="{% url 'home' %}" class="title">物件検索サイト</a>
+    <a href="{% url 'home' %}" class="title">物件検索サイト</a>
 
     <ul class="login-contents">
-    {% if user.is_authenticated %}
-      <li><a class="user">{{ user.username }}でログイン中</li></a><li><a href="{% url 'favorite' %}" class="fav">お気に入りへ</a></li><li><a href="{% url 'logout' %}" class="logout">ログアウト</a></li>
+      {% if user.is_authenticated %}
+      <li><a class="user">{{ user.username }}でログイン中</li></a>
+      <li><a href="{% url 'favorite' %}" class="fav">お気に入りへ</a></li>
+      <li><a href="{% url 'logout' %}" class="logout">ログアウト</a></li>
       {% else %}
       <li>
-      <a href="{% url 'login' %}" class="login">ログイン</a>
+        <a href="{% url 'login' %}" class="login">ログイン</a>
       </li>
       {% endif %}
-      </ul>
-</header>
-<div class="panel panel-default">
+    </ul>
+  </header>
+  <div class="panel panel-default">
     <div class="panel-heading">検索結果</div>
-<table border="1" class="table table-hover">
-    <tr>
-      <th></th>
-      <th>登録サイト</th>
-      <th>物件名</th>
-      <th>住所</th>
-      <th>家賃</th>
-      <th>間取り</th> 
-      <th>面積</th>
-      <th>最寄り駅</th>
-      <th>徒歩</th>
-      <th>築年数</th>
-      <th>相場比較</th>
-      <th>お得物件</th>  
-    </tr>
-   {% for index, row in df.iterrows%}
+    <table border="1" class="table table-hover">
+      <tr>
+        <th></th>
+        <th>登録サイト</th>
+        <th>物件名</th>
+        <th>住所</th>
+        <th>家賃</th>
+        <th>間取り</th>
+        <th>面積</th>
+        <th>最寄り駅</th>
+        <th>徒歩</th>
+        <th>築年数</th>
+        <th>相場比較</th>
+        <th>お得物件</th>
+      </tr>
+      {% for index, row in df.iterrows%}
 
-    <tr>
-    <td>{% if user.is_authenticated %}<button type="button" class="selectBtn" id="{{ index }}" action="post/" method="post">{% else %}
-<button type="button" id="{{ index }}" disabled>
-      {% endif %}<i class="fas fa-bookmark btn"></i></button>
-     </td>
-      <td>
-     {{ row.category }}
-     </td>
-     <td>
-     <a href="{{ row.url }}">
-     {{ row.name }}
-     </a>
-    </td>
-     <td>
-     {{ row.address }}
-    </td>
-     <td>
-     {{ row.rent }}万円
-    </td>
-    <td>
-     {{ row.layout }}
-    </td>
-     <td>
-     {{ row.area }}㎡
-    </td>
-     <td>
-     {{ row.station }}
-    </td>
-     <td>
-     {{ row.timeOnFoot }}分
-    </td>
-     {% if row.age == 0 %}
-     <td>
-     新築
-     </td>
-     {% else %}
-      <td>
-     {{ row.age }}年
-     </td>
-     {% endif%}
-    
-    {% if row.difference > 0 %}
-     <td>+{{ row.difference }}万円
-    </td>
-    {% else %}
-    <td>
-    {{ row.difference }}万円
-    </td>
-  {% endif%}
-    {% if row.bargain %}
-     <td>
-   
-<i class="fas fa-star"></i>
+      <tr>
+        <td>{% if user.is_authenticated %}<button type="button" class="selectBtn" id="{{ index }}" action="post/"
+            method="post">{% else %}
+            <button type="button" id="{{ index }}" disabled>
+              {% endif %}<i class="fas fa-bookmark btn"></i></button>
+        </td>
+        <td>
+          {{ row.category }}
+        </td>
+        <td>
+          <a href="{{ row.url }}">
+            {{ row.name }}
+          </a>
+        </td>
+        <td>
+          {{ row.address }}
+        </td>
+        <td>
+          {{ row.rent }}万円
+        </td>
+        <td>
+          {{ row.layout }}
+        </td>
+        <td>
+          {{ row.area }}㎡
+        </td>
+        <td>
+          {{ row.station }}
+        </td>
+        <td>
+          {{ row.timeOnFoot }}分
+        </td>
+        {% if row.age == 0 %}
+        <td>
+          新築
+        </td>
+        {% else %}
+        <td>
+          {{ row.age }}年
+        </td>
+        {% endif%}
 
-    </td>
-    {% else %}
-    <td>
-    
-    </td>
-    {% endif%}
-    </tr>
+        {% if row.difference > 0 %}
+        <td>+{{ row.difference }}万円
+        </td>
+        {% else %}
+        <td>
+          {{ row.difference }}万円
+        </td>
+        {% endif%}
+        {% if row.bargain %}
+        <td>
 
-{% endfor %} 
- </table>
- </div>
- </body>
-<script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"></script>
+          <i class="fas fa-star"></i>
+
+        </td>
+        {% else %}
+        <td>
+
+        </td>
+        {% endif%}
+      </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
-var df = JSON.parse('{{ json|safe }}');
-$(".selectBtn").on("click", function(){
-  var id = $(this).attr('id')
-  var category = df.category[id]
-  var name = df.name[id]
-  var url = df.url[id]
-  var address = df.address[id]
-  var rent = df.rent[id]
-  var layout = df.layout[id]
-  var area = df.area[id]
-  var station = df.station[id]
-  var timeOnfoot = df.timeOnFoot[id]
-  var age = df.age[id]
-  var difference = df.difference[id]
-  var bargain = df.bargain[id]
+  var df = JSON.parse('{{ json|safe }}');
+  $(".selectBtn").on("click", function () {
+    var id = $(this).attr('id')
+    var category = df.category[id]
+    var name = df.name[id]
+    var url = df.url[id]
+    var address = df.address[id]
+    var rent = df.rent[id]
+    var layout = df.layout[id]
+    var area = df.area[id]
+    var station = df.station[id]
+    var timeOnfoot = df.timeOnFoot[id]
+    var age = df.age[id]
+    var difference = df.difference[id]
+    var bargain = df.bargain[id]
 
     var lsData = localStorage.getItem('data');
-  if (lsData != null) {
+    if (lsData != null) {
       lsData = JSON.parse(lsData)
       lsData.push({
-    'category':category,
-    'name':name,
-    'url':url,
-    'address':address,
-    'rent':rent,
-    'layout':layout,
-    'area':area,
-    'station':station,
-    'timeOnFoot':timeOnfoot,
-    'age':age,
-    'difference':difference,
-    'bargain':bargain
-  })
-  localStorage.setItem('data',JSON.stringify(lsData))
-  } else {
-        var data = []
-    data.push({
-    'category':category,
-    'name':name,
-    'url':url,
-    'address':address,
-    'rent':rent,
-    'layout':layout,
-    'area':area,
-    'station':station,
-    'timeOnFoot':timeOnfoot,
-    'age':age,
-    'difference':difference,
-    'bargain':bargain
-  })
-       localStorage.setItem('data',JSON.stringify(data))
-  }
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
+        'category': category,
+        'name': name,
+        'url': url,
+        'address': address,
+        'rent': rent,
+        'layout': layout,
+        'area': area,
+        'station': station,
+        'timeOnFoot': timeOnfoot,
+        'age': age,
+        'difference': difference,
+        'bargain': bargain
+      })
+      localStorage.setItem('data', JSON.stringify(lsData))
+    } else {
+      var data = []
+      data.push({
+        'category': category,
+        'name': name,
+        'url': url,
+        'address': address,
+        'rent': rent,
+        'layout': layout,
+        'area': area,
+        'station': station,
+        'timeOnFoot': timeOnfoot,
+        'age': age,
+        'difference': difference,
+        'bargain': bargain
+      })
+      localStorage.setItem('data', JSON.stringify(data))
+    }
+
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+          var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
         }
+      }
+      return cookieValue;
     }
-    return cookieValue;
-}
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}var csrf_token = getCookie("csrftoken");
 
-     $.ajax({
-            'url':$(`button#${id}`).attr('action'),
-            'type':'POST',
-            'data':{
-                'category':category,
-                'name':name,
-                'url':url,
-                'address':address,
-                'rent':rent,
-                'layout':layout,
-                'area':area,
-                'station':station,
-                'timeOnFoot':timeOnfoot,
-                'age':age,
-                'difference':difference,
-                'bargain':bargain
-            },
-            contentType: "application/json",
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
-                }
-            },
-            success: function(data) {
-                var i = $(this).children('.btn')
-                $(`#${id}`).children('.btn').css('color', '#00cc00')
-            },
-            error: function(xhr, status, error) {
-                alert(status + "\n" + 
-                        "Status: " + xhr.status + "\n" + error);
-            }
-        });
-        return false;
-});
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    var csrf_token = getCookie("csrftoken");
 
-
-
+    $.ajax({
+      'url': $(`button#${id}`).attr('action'),
+      'type': 'POST',
+      'data': {
+        'category': category,
+        'name': name,
+        'url': url,
+        'address': address,
+        'rent': rent,
+        'layout': layout,
+        'area': area,
+        'station': station,
+        'timeOnFoot': timeOnfoot,
+        'age': age,
+        'difference': difference,
+        'bargain': bargain
+      },
+      contentType: "application/json",
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrf_token);
+        }
+      },
+      success: function (data) {
+        var i = $(this).children('.btn')
+        $(`#${id}`).children('.btn').css('color', '#00cc00')
+      },
+      error: function (xhr, status, error) {
+        alert(status + "\n" +
+          "Status: " + xhr.status + "\n" + error);
+      }
+    });
+    return false;
+  });
 </script>
-

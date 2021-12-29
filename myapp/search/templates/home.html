@@ -1,85 +1,86 @@
 {% load static %} {% load widget_tweaks %}
 <html lang="ja">
-  <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"
-    />
-    <link
-      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-      rel="stylesheet"
-    />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/search.css' %}">
-    <meta charset="utf-8" />
-    <title>物件検索</title>
-  </head>
-  <body>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+  <meta charset="utf-8" />
+  <title>物件検索</title>
+</head>
+
+<body>
   <header>
-        <a href ="{% url 'home' %}" class='title'>物件検索サイト</a>
+    <a href="{% url 'home' %}" class='title'>物件検索サイト</a>
 
     <ul class="login-contents">
-    {% if user.is_authenticated %}
-      <li><a class="user">{{ user.username }}でログイン中</li></a><li><a href="{% url 'favorite' %}" class="fav">お気に入りへ</a></li><li><a href="{% url 'logout' %}" class="logout">ログアウト</a></li>
+      {% if user.is_authenticated %}
+      <li><a class="user">{{ user.username }}でログイン中</li></a>
+      <li><a href="{% url 'favorite' %}" class="fav">お気に入りへ</a></li>
+      <li><a href="{% url 'logout' %}" class="logout">ログアウト</a></li>
       {% else %}
       <li>
-      <a href="{% url 'login' %}" class="login">ログイン</a>
+        <a href="{% url 'login' %}" class="login">ログイン</a>
       </li>
       {% endif %}
-      </ul>
-</header>
-<div class="container">
-      <form action="{% url 'result' %}" method="GET" class="get-form">
-        <h3 class="font-weight-bold">キーワード検索 : </h3><br /><br /><br /> <label>以下の文字を含む</label><br /><input
-          type="text"
-          id="text"
-          name="text"
-          class="form-control" 
-        />
-      <h3 class="font-weight-bold">賃料  : </h3></br></br></br>
-        {% csrf_token %} {% for field in lower %} 
-          {{ field }} 
-        {% endfor %} 
-        {% csrf_token %} <span> - </span> {% for field in upper %} 
-          {{ field }} 
-        {% endfor %} 
-        </br>
-        <br />
-        <input type="checkbox" name="bargain" id="bargain" value="True" />
-        <label>お得物件のみ表示する</label>
-        <br />
-        <input type="checkbox" name="diff" id="diff" value="True" />
-        <label>相場より安い物件のみ表示する</label> <br />
-        <br />
-        <h3 class="font-weight-bold">駅徒歩 : 　</h3><br />
-       
-        {% csrf_token %} {% for field in time %} 
-          {{ field }} 
-        {% endfor %}
-        <br /><br /><br />
-         <h3 class="font-weight-bold">面積 : 　</h3><br />
-        {% csrf_token %} {% for field in lArea %} 
-          {{ field }} 
-        {% endfor %}
-        <span> - </span>
-        {% csrf_token %} {% for field in upperArea %} 
-          {{ field }} 
-        {% endfor %}
-        <br /><br /><br />
-        <h3 class="font-weight-bold">築年数 : 　</h3><br />
-        {% csrf_token %} {% for field in age %} 
-          {{ field }} 
-        {% endfor %}
-        <br /><br /><br />
-        <input class="submitBtn" type="submit" name="start_button" />
-      </form>
-</div>
-  </body>
+    </ul>
+  </header>
+  <div class="container">
+    <form action="{% url 'result' %}" method="GET" class="get-form">
+      <h3 class="font-weight-bold">キーワード検索 : </h3><br /><br /><br /> <label>以下の文字を含む</label><br /><input type="text"
+        id="text" name="text" class="form-control" />
+      <h3 class="font-weight-bold">賃料 : </h3></br></br></br>
+      {% csrf_token %}
+      {% for field in lower %}
+      {{ field }}
+      {% endfor %}
+      {% csrf_token %} <span> - </span>
+      {% for field in upper %}
+      {{ field }}
+      {% endfor %}
+      </br>
+      <br />
+      <input type="checkbox" name="bargain" id="bargain" value="True" />
+      <label>お得物件のみ表示する</label>
+      <br />
+      <input type="checkbox" name="diff" id="diff" value="True" />
+      <label>相場より安い物件のみ表示する</label> <br />
+      <br />
+      <h3 class="font-weight-bold">駅徒歩 : 　</h3><br />
+
+      {% csrf_token %} {% for field in time %}
+      {{ field }}
+      {% endfor %}
+      <br /><br /><br />
+      <h3 class="font-weight-bold">面積 : 　</h3><br />
+      {% csrf_token %} {% for field in lArea %}
+      {{ field }}
+      {% endfor %}
+      <span> - </span>
+      {% csrf_token %} {% for field in upperArea %}
+      {{ field }}
+      {% endfor %}
+      <br /><br /><br />
+      <h3 class="font-weight-bold">築年数 : 　</h3><br />
+      {% csrf_token %} {% for field in age %}
+      {{ field }}
+      {% endfor %}
+      <br /><br /><br />
+      <input class="submitBtn" type="submit" name="start_button" />
+    </form>
+  </div>
+</body>
+
 </html>

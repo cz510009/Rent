@@ -3,12 +3,13 @@
 }
 
 /*--- table css ---*/
-.sorttbl{
+.sorttbl {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
   display: table;
 }
+
 .sorttbl tr {
   display: table-row;
   vertical-align: inherit;
@@ -18,24 +19,26 @@
 }
 
 .sorttbl th:first-child,
-.sorttbl td:first-child{
+.sorttbl td:first-child {
   padding-left: 16px;
 }
+
 .sorttbl td,
-.sorttbl th{
+.sorttbl th {
   padding: 8px 8px;
   display: table-cell;
   text-align: left;
   vertical-align: top;
 }
-.sorttbl th{
-  color: #fff!important;
-  background-color: #616161!important;
+
+.sorttbl th {
+  color: #fff !important;
+  background-color: #616161 !important;
 }
 
 /*--- list css ---*/
 
-.sort-btn{
+.sort-btn {
   border: none;
   display: inline-block;
   padding: 8px 16px;
@@ -49,10 +52,11 @@
   white-space: nowrap;
 }
 
-ul.sortlist{
+ul.sortlist {
   list-style-type: none;
 }
-ul.sortlist li{
+
+ul.sortlist li {
   padding: 7px;
   border-bottom: dotted 1px #454545;
 }
@@ -65,37 +69,45 @@ header {
   font-weight: bold;
   height: 60px;
 }
-h3 { 
+
+h3 {
   float: left;
 }
+
 .title {
   font-size: 15px;
   padding-left: 30px;
 }
-a {	
+
+a {
   text-decoration: none;
   color: black;
-  
+
 }
+
 header a {
-  color:white;
-  text-align:center;
-  height:60px;
-  line-height:60px;
+  color: white;
+  text-align: center;
+  height: 60px;
+  line-height: 60px;
 }
+
 .login-contents {
- padding-right:40px;
- color:white;
+  padding-right: 40px;
+  color: white;
 }
+
 .user {
- pointer-events: none;
+  pointer-events: none;
 }
+
 ul {
   list-style: none;
-  float:right;
+  float: right;
 }
+
 li {
-  float:left;
- margin-right:30px;
+  float: left;
+  margin-right: 30px;
   font-size: 14px;
 }
