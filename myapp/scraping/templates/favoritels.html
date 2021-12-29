@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+    <div class="panel-heading">検索結果</div>
+    <a href ="{% url 'search' %}">検索ページへ</a>
+<table border="1" class="table table-hover">
+    <tr>
+      <th>登録サイト</th>
+      <th>物件名</th>
+      <th>住所</th>
+      <th>家賃</th>
+      <th>間取り</th> 
+      <th>面積</th>
+      <th>最寄り駅</th>
+      <th>徒歩</th>
+      <th>築年数</th>
+      <th>相場比較</th>
+      <th>お得物件</th>  
+    </tr>
+   {% for index, row in df.iterrows%}
+
+    <tr>
+      <td>
+     {{ row.category }}
+     </td>
+     <td>
+     <a href="{{ row.url }}">
+     {{ row.name }}
+     </a>
+    </td>
+     <td>
+     {{ row.address }}
+    </td>
+     <td>
+     {{ row.rent }}万円
+    </td>
+    <td>
+     {{ row.layout }}
+    </td>
+     <td>
+     {{ row.area }}㎡
+    </td>
+     <td>
+     {{ row.station }}
+    </td>
+     <td>
+     {{ row.timeOnFoot }}分
+    </td>
+     {% if row.age == 0 %}
+     <td>
+     新築
+     </td>
+     {% else %}
+      <td>
+     {{ row.age }}年
+     </td>
+     {% endif%}
+    
+    {% if row.difference > 0 %}
+     <td>+{{ row.difference }}万円
+    </td>
+    {% else %}
+    <td>
+    {{ row.difference }}万円
+    </td>
+  {% endif%}
+    {% if row.bargain %}
+     <td>
+   
+<i class="fas fa-star"></i>
+
+    </td>
+    {% else %}
+    <td>
+    
+    </td>
+    {% endif%}
+    </tr>
+
+{% endfor %} 
+ </table>
+ </div>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+<script>
+$(document).ready( function(){
+        var ls = localStorage.getItem('data')
+        var src = data.map(function(i){
+      return '<li>' +
+        '<a href="' + i.href + '">' +
+        '<div class="thumb"><span><img src="' + i.thumb + '" alt=""></span></div>' +
+        '<div class="data">' +
+        '<p class="date">' + i.date + '</p>' +
+        '<p class="title">' + i.title + '</p>' +
+        '<p class="copy">' + i.copy + '</p>' +
+        '<p class="source">' + i.source + '</p>' +
+        '</div>' +
+        '</a>' +
+        '</li>';
+    }).join('');
+
+    src = '<ul>' + src + '</ul>';
+    $('#headline_contents').append(src);
+    });
+</script>
