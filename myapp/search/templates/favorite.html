@@ -29,7 +29,7 @@
 </head>
 <body>
 <header>
-        <a href ="{% url 'search' %}" class="title">物件検索サイト</a>
+        <a href ="{% url 'home' %}" class="title">物件検索サイト</a>
     <ul class="login-contents">
     {% if user.is_authenticated %}
       <li><a class="user">{{ user.username }}でログイン中</li></a><li><a href="{% url 'favorite' %}" class="fav">お気に入りへ</a></li><li><a href="{% url 'logout' %}" class="logout">ログアウト</a></li>

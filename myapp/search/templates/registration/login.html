@@ -4,7 +4,7 @@
 
 {% block content %}
 <div>
-<a href ="{% url 'search' %}">検索ページへ</a>
+<a href ="{% url 'home' %}">検索ページへ</a>
       {% if user.is_authenticated %}
       <p>{{ user.username }}でログイン中</p>
       {% else %}

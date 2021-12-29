@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'scraping.apps.ScrapingConfig',
+    'search.apps.SearchConfig',
     'accounts.apps.AccountsConfig',
     'widget_tweaks'
 ]
@@ -129,7 +129,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/scraping/search'
+LOGIN_REDIRECT_URL = '/search/home'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
 

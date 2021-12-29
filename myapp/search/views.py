@@ -173,7 +173,7 @@ def getRentInfoFromSuumo():
 df = pd.DataFrame(index=[], columns=[])
 
 
-def home(request):
+def result(request):
     conditions = {
         'text': request.GET.get('text'),
         'bargain': bool(request.GET.get('bargain')),
@@ -242,13 +242,13 @@ def home(request):
             df = tempDf
     df = df.sort_values(by=['rent'], ascending=True)
     print(df.columns)
-    template = loader.get_template('home.html')
+    template = loader.get_template('result.html')
     json = df.to_json(force_ascii=False)
     context = {'df': df, 'json': json}
     return HttpResponse(template.render(context, request))
 
 
-def search(request):
+def home(request):
     lower = forms.LowerChoiceForm()
     upper = forms.UpperChoiceForm()
     time = forms.TimeChoiceForm()
@@ -264,7 +264,7 @@ def search(request):
         'upperArea': upperArea,
         'age': age
     }
-    return render(request, 'search.html', context)
+    return render(request, 'home.html', context)
 
 
 def for_ajax(request):    # AJAXに答える関数
