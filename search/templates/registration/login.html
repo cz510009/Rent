@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+
+{% block titele %}ログイン{% endblock %}
+
+{% block content %}
+<div>
+<a href ="{% url 'home' %}">検索ページへ</a>
+      {% if user.is_authenticated %}
+      <p>{{ user.username }}でログイン中</p>
+      {% else %}
+      <p>ログインしていません</p>
+      {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">ログイン</button>
+    </form>
+</div>
+{% endblock %}
