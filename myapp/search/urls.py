@@ -3,8 +3,8 @@ from . import views
 from django.conf.urls import url, include
 from django.contrib.auth import login, logout
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('search/', views.search, name='search'),
+    path('result', views.result, name='result'),
+    path('home/', views.home, name='home'),
     path('favorite/', views.favorite, name='favorite'),
     url(r'^post/', views.for_ajax),
     path('favorite/delete/', views.delete),

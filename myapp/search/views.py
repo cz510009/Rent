@@ -171,7 +171,9 @@ def getRentInfoFromSuumo():
 
 
 df = pd.DataFrame(index=[], columns=[])
-def home(request):
+
+
+def result(request):
     conditions = {
         'text': request.GET.get('text'),
         'bargain': bool(request.GET.get('bargain')),
@@ -186,7 +188,7 @@ def home(request):
 
     getRentInfoFromSFit()
 
-    getRentInfoFromSuumo()
+ #   getRentInfoFromSuumo()
     df = pd.DataFrame(rentInfo)
     if conditions['lower'] != '0':
         l = conditions['lower']
@@ -240,13 +242,13 @@ def home(request):
             df = tempDf
     df = df.sort_values(by=['rent'], ascending=True)
     print(df.columns)
-    template = loader.get_template('home.html')
+    template = loader.get_template('result.html')
     json = df.to_json(force_ascii=False)
-    context = {'df': df, 'json':json}
+    context = {'df': df, 'json': json}
     return HttpResponse(template.render(context, request))
 
 
-def search(request):
+def home(request):
     lower = forms.LowerChoiceForm()
     upper = forms.UpperChoiceForm()
     time = forms.TimeChoiceForm()
@@ -258,15 +260,16 @@ def search(request):
         'lower': lower,
         'upper': upper,
         'time': time,
-        'lArea':lArea,
-        'upperArea':upperArea,
-        'age':age
+        'lArea': lArea,
+        'upperArea': upperArea,
+        'age': age
     }
-    return render(request, 'search.html', context)
+    return render(request, 'home.html', context)
+
 
 def for_ajax(request):    # AJAXに答える関数
     import json
-    from django.http import HttpResponse,Http404
+    from django.http import HttpResponse, Http404
 
     if request.method == 'POST':
         from django.http import QueryDict
@@ -274,7 +277,7 @@ def for_ajax(request):    # AJAXに答える関数
         dic = QueryDict(request.body, encoding='utf-8')
         category = dic.get('category')
         name = dic.get('name')
-        url=dic.get('url')
+        url = dic.get('url')
         address = dic.get('address')
         rent = dic.get('rent')
         layout = dic.get('layout')
@@ -289,17 +292,20 @@ def for_ajax(request):    # AJAXに答える関数
         else:
             bargain = True
         user = request.user
-        db = Rent(user=user,category=category, name=name, url=url,address=address, rent=rent, layout=layout, area=area,station=station,timeOnFoot=timeOnFoot,age=age,difference=difference,bargain=bargain)
+        db = Rent(user=user, category=category, name=name, url=url, address=address, rent=rent, layout=layout,
+                  area=area, station=station, timeOnFoot=timeOnFoot, age=age, difference=difference, bargain=bargain)
         db.save()
         return HttpResponse("登録しました")
+
 
 def favorite(request):
     from .models import Rent
     data = Rent.objects.all().filter(user=request.user)
     context = {
-        'data':data
+        'data': data
     }
     return render(request, 'favorite.html', context)
+
 
 def delete(request):
     if request.method == 'POST':
@@ -317,7 +323,7 @@ def delete(request):
 #         from django.http import QueryDict
 #         from .models import Rent
 #         dic = request.GET.get('data'),
-   
+
 #         return dic
 
 # import ast

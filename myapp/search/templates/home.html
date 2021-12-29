@@ -23,7 +23,7 @@
   </head>
   <body>
   <header>
-        <a href ="{% url 'search' %}" class='title'>物件検索サイト</a>
+        <a href ="{% url 'home' %}" class='title'>物件検索サイト</a>
 
     <ul class="login-contents">
     {% if user.is_authenticated %}
@@ -36,7 +36,7 @@
       </ul>
 </header>
 <div class="container">
-      <form action="{% url 'home' %}" method="GET" class="get-form">
+      <form action="{% url 'result' %}" method="GET" class="get-form">
         <h3 class="font-weight-bold">キーワード検索 : </h3><br /><br /><br /> <label>以下の文字を含む</label><br /><input
           type="text"
           id="text"
