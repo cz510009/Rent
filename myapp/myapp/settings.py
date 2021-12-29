@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'search.apps.SearchConfig',
     'accounts.apps.AccountsConfig',
-    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'myapp.urls'
@@ -121,9 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, "static"),
+# )
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -135,8 +136,8 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['rent-search-app.herokuapp.com', '127.0.0.1']
 
 STATIC_ROOT = 'staticfiles'
 
-DEBUG = True
+DEBUG = False
