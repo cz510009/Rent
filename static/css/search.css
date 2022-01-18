@@ -1,0 +1,57 @@
+
+ body {
+    font-family: "sans-serif";
+    background-color: white;
+ }
+ header {
+    top: 0;
+    width: 100%;
+    background-color: #001A43;
+    align-items: center;
+    font-weight: bold;
+    height: 60px;
+ }
+ h3 { 
+    float: left;
+ }
+ .title {
+    font-size: 15px;
+    padding-left: 30px;
+ }
+ a {	
+    text-decoration: none;
+    color: black;
+    
+ }
+ header a {
+    color:white;
+    text-align:center;
+    height:60px;
+    line-height:60px;
+ }
+.login-contents {
+   padding-right:40px;
+   color:white;
+}
+.user {
+   pointer-events: none;
+}
+ ul {
+    list-style: none;
+    float:right;
+ }
+ li {
+    float:left;
+   margin-right:30px;
+    font-size: 14px;
+ }
+form input {
+   margin: 0 auto
+}
+ .submitBtn {
+    display: block;
+   margin: 0 auto;
+ }
+ .container {
+    width: 80%;
+ }

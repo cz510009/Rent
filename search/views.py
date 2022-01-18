@@ -188,7 +188,7 @@ def result(request):
 
     getRentInfoFromSFit()
 
- #   getRentInfoFromSuumo()
+    getRentInfoFromSuumo()
     df = pd.DataFrame(rentInfo)
     if conditions['lower'] != '0':
         l = conditions['lower']
@@ -313,50 +313,3 @@ def delete(request):
         id = dic.get('id')
         Rent.objects.filter(id=id).delete()
         return HttpResponse("削除しました")
-
-
-# def localStorage(request):    # AJAXに答える関数
-#     import json
-#     from django.http import HttpResponse,Http404
-
-#     if request.method == 'POST':
-#         from django.http import QueryDict
-#         from .models import Rent
-#         dic = request.GET.get('data'),
-
-#         return dic
-
-# import ast
-
-# from django.http import JsonResponse
-# def ajax(request):
-#     data = request.GET.get('ls')
-#     data = data.replace('[','')
-#     data = data.replace(']','')
-#     data =re.sub('^"','',data)
-#     data =re.sub('"$','',data)
-#     data = re.split('(?<=}).*?(?={)', data)
-#     rentInfo = {'category': [], 'name': [], 'address': [], 'layout': [], 'rent': [], 'area': [],
-#             'station': [], 'timeOnFoot': [], 'age': [], 'url': [], 'difference': [], 'bargain': []}
-#     for d in data:
-#         d = d.replace('\\','')
-#         d = json.loads(d)
-#         rentInfo['category'].append(d['category'])
-#         rentInfo['name'].append(d['name'])
-#         rentInfo['address'].append(d['address'])
-#         rentInfo['layout'].append(d['layout'])
-#         rentInfo['rent'].append(d['rent'])
-#         rentInfo['area'].append(d['area'])
-#         rentInfo['station'].append(d['station'])
-#         rentInfo['timeOnFoot'].append(d['timeOnFoot'])
-#         rentInfo['age'].append(d['age'])
-#         rentInfo['url'].append(d['url'])
-#         rentInfo['difference'].append(d['difference'])
-#         rentInfo['bargain'].append(d['bargain'])
-#     for key in rentInfo.keys():
-#         print(len(rentInfo[key]))
-#     df = pd.DataFrame(rentInfo)
-#     context = {
-#         'df':df
-#     }
-#     return context
